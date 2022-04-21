@@ -7,7 +7,7 @@ const Books = ({ goToSearchPage, shelfStatus }) => {
   // => triggered onload, once => useEffect
 
   // TODO
-  // book components
+  // change into book components
   // fetch data => getAll
   useEffect(() => {});
 

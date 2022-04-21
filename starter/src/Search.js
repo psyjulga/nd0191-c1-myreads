@@ -3,23 +3,25 @@ import { search } from "./BooksAPI";
 import Book from "./Book";
 
 // TODO
-// api call does not work properly
+// api call does not work properly !!
 
 const Search = ({ goToSearchPage, shelfStatus }) => {
-  const [input, setInput] = useState("react");
+  const [input, setInput] = useState("");
   const [books, setBooks] = useState([]);
 
-  const getBooks = async () => {
-    const booksData = await search(input, 20);
-    console.log(booksData);
-    // DOES NOT SEEM TO WORK PROPERLY
-    setBooks(booksData);
-  };
+  useEffect(() => {
+    const getBooks = async () => {
+      const booksData = await search(input, 20);
+      console.log(input);
+      console.log(booksData);
+      // DOES NOT SEEM TO WORK PROPERLY
+      setBooks(booksData);
+    };
+    if (input) getBooks(input);
+  }, [input]);
 
   const getInput = (e) => {
     setInput(e.target.value);
-
-    getBooks();
   };
 
   return (
