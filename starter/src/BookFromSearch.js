@@ -19,7 +19,7 @@ const BookFromSearch = ({ books, update, backendBooks }) => {
 
   let comparedBooks = [];
 
-  if (books.length > 0) {
+  if (books && books.length > 0) {
     books.forEach((a) => {
       const found = findBookById(a.id);
       comparedBooks.push(found !== undefined ? found : withShelf(a));

@@ -9,18 +9,20 @@ const Search = ({ update, backendBooks }) => {
 
   // api call for searching books by input
   const searchForInput = (e) => {
-    setInput(e.target.value);
+    const inputValue = e.target.value;
+    setInput(inputValue);
 
     const getBooks = async () => {
       try {
-        const booksData = await search(input, 20);
+        const booksData = await search(inputValue, 20);
         setBooks(booksData);
       } catch (e) {
         console.log("error in search", e);
         setInput("");
       }
     };
-    if (input) getBooks(input);
+
+    if (inputValue) getBooks();
   };
 
   return (
