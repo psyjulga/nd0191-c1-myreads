@@ -1,38 +1,37 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
+import { Link } from "react-router-dom";
 import { search } from "./BooksAPI";
-import Book from "./Book";
+import BookFromSearch from "./BookFromSearch";
 
-// TODO
-// api call does not work properly !!
-
-const Search = ({ goToSearchPage, shelfStatus }) => {
+const Search = ({ update, backendBooks }) => {
   const [input, setInput] = useState("");
   const [books, setBooks] = useState([]);
 
-  useEffect(() => {
+  // api call for searching books by input
+  const searchForInput = (e) => {
+    setInput(e.target.value);
+
     const getBooks = async () => {
-      const booksData = await search(input, 20);
-      console.log(input);
-      console.log(booksData);
-      // DOES NOT SEEM TO WORK PROPERLY
-      setBooks(booksData);
+      try {
+        const booksData = await search(input, 20);
+        setBooks(booksData);
+      } catch (e) {
+        console.log("error in search", e);
+        setInput("");
+      }
     };
     if (input) getBooks(input);
-  }, [input]);
-
-  const getInput = (e) => {
-    setInput(e.target.value);
   };
 
   return (
     <div className="search-books">
       <div className="search-books-bar">
-        <a className="close-search" onClick={goToSearchPage}>
+        <Link to="/" className="close-search">
           Close
-        </a>
+        </Link>
         <div className="search-books-input-wrapper">
           <input
-            onChange={getInput}
+            onChange={searchForInput}
             value={input}
             type="text"
             placeholder="Search by title, author, or ISBN"
@@ -41,7 +40,15 @@ const Search = ({ goToSearchPage, shelfStatus }) => {
       </div>
       <div className="search-books-results">
         <ol className="books-grid">
-          <Book books={books} />
+          {input ? (
+            <BookFromSearch
+              books={books}
+              update={update}
+              backendBooks={backendBooks}
+            />
+          ) : (
+            <div>no books found</div>
+          )}
         </ol>
       </div>
     </div>

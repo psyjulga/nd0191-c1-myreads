@@ -1,30 +1,47 @@
 import "./App.css";
 import { useState, useEffect } from "react";
-// import { search } from "./BooksAPI.js";
+import { Route, Routes } from "react-router-dom";
 import Search from "./Search.js";
-import Books from "./Books.js";
+import Library from "./Library.js";
+import { update, getAll } from "./BooksAPI.js";
 
-// TODO
-// shelves and statuses
 function App() {
-  const [showSearchPage, setShowSearchpage] = useState(false);
-  const [shelfStatus, setShelfStatus] = useState("none");
-  // state => books have one of four states
-  // (none, want to read, currently, reading, read)
-  // we need that state on both pages
-  const goToSearchPage = () => {
-    setShowSearchpage(!showSearchPage);
+  const [updated, setUpdated] = useState([]);
+  const [myBooks, setMyBooks] = useState([]);
+
+  // api call for updating the backend
+  const updateBackend = (book, newShelf) => {
+    const myUpdate = async () => {
+      const updated = await update(book, newShelf);
+      setUpdated(updated);
+      // to trigger a rerender
+      // for library to update UI
+    };
+    myUpdate();
   };
-  // handle click to go to search page
-  // we need to toggle that from both pages
+
+  // api call for getting all books from the backend
+  useEffect(() => {
+    const getAllBooks = async () => {
+      const response = await getAll();
+      setMyBooks(response);
+    };
+    getAllBooks();
+  }, [updated]);
 
   return (
     <div className="app">
-      {showSearchPage ? (
-        <Search goToSearchPage={goToSearchPage} shelfStatus={shelfStatus} />
-      ) : (
-        <Books goToSearchPage={goToSearchPage} shelfStatus={shelfStatus} />
-      )}
+      <Routes>
+        <Route
+          exact
+          path="/"
+          element={<Library update={updateBackend} books={myBooks} />}
+        />
+        <Route
+          path="/search"
+          element={<Search update={updateBackend} backendBooks={myBooks} />}
+        />
+      </Routes>
     </div>
   );
 }
