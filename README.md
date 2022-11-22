@@ -1,4 +1,20 @@
-# MyReads Project
+# React Project: My Reads
+
+```
+Back to React!
+It was only now when I realized how much I had missed it!
+We learnt about the JavaScript library again, going much
+deeper than I had ever gone before.
+It took me some time to really get it, but I stick with
+the process of learning, trying again, going through the logic again.
+React simplifies frontend development so much, and it was 
+demanding and rewarding at the same time to build the my reads projects. 📖
+```
+
+## Open the Library yourself 😉
+[https://react-my-reads-project.netlify.app/](https://react-my-reads-project.netlify.app/)
+
+# About the Project
 
 This is my submission for the final assessment project for Udacity's React Fundamentals course.
 
