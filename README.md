@@ -1,4 +1,4 @@
-# React Project: My Reads
+# React Project: My Reads 📖
 
 ```
 Back to React!
@@ -8,7 +8,7 @@ deeper than I had ever gone before.
 It took me some time to really get it, but I stick with
 the process of learning, trying again, going through the logic again.
 React simplifies frontend development so much, and it was 
-demanding and rewarding at the same time to build the my reads projects. 📖
+demanding and rewarding at the same time to build the my reads project. 
 ```
 
 ## Open the Library yourself 😉
